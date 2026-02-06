@@ -1,65 +1,103 @@
+const formTitle = document.getElementById("formTitle");
+const nameGroup = document.getElementById("nameGroup");
+const submitBtn = document.getElementById("submitBtn");
+const toggleText = document.getElementById("toggleText");
+const toggleLink = document.getElementById("toggleLink");
+
+const form = document.getElementById("authForm");
+const successMsg = document.getElementById("successMsg");
+
 let isSignup = false;
 
+/* ---------------- TOGGLE FORM ---------------- */
 function toggleForm() {
   isSignup = !isSignup;
 
-  document.getElementById("formTitle").innerText = isSignup ? "Sign Up" : "Login";
-  document.getElementById("submitBtn").innerText = isSignup ? "Sign Up" : "Login";
-  document.getElementById("toggleText").innerText = isSignup
-    ? "Already have an account?"
-    : "Don't have an account?";
-  document.getElementById("toggleLink").innerText = isSignup ? "Login" : "Sign Up";
+  if (isSignup) {
+    formTitle.innerText = "Sign Up";
+    submitBtn.innerText = "Sign Up";
+    toggleText.innerText = "Already have an account?";
+    toggleLink.innerText = "Login";
+    nameGroup.style.display = "block";
+  } else {
+    formTitle.innerText = "Login";
+    submitBtn.innerText = "Login";
+    toggleText.innerText = "Don't have an account?";
+    toggleLink.innerText = "Sign Up";
+    nameGroup.style.display = "none";
+  }
 
-  document.getElementById("nameGroup").style.display = isSignup
-    ? "block"
-    : "none";
-
-  document.getElementById("successMsg").innerText = "";
+  clearErrors();
+  successMsg.style.display = "none";
+  form.reset();
 }
 
+/* ---------------- SHOW / HIDE PASSWORD ---------------- */
 function togglePassword() {
   const password = document.getElementById("password");
   password.type = password.type === "password" ? "text" : "password";
 }
 
-document.getElementById("authForm").addEventListener("submit", function (e) {
+/* ---------------- CLEAR ERRORS ---------------- */
+function clearErrors() {
+  document.querySelectorAll(".error").forEach(err => {
+    err.style.display = "none";
+  });
+}
+
+/* ---------------- FORM SUBMIT ---------------- */
+form.addEventListener("submit", function (e) {
   e.preventDefault();
+  clearErrors();
 
-  let valid = true;
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-  const name = document.getElementById("name");
-  const email = document.getElementById("email");
-  const password = document.getElementById("password");
+  let isValid = true;
 
-  if (isSignup && name.value.trim() === "") {
+  if (isSignup && name === "") {
     document.getElementById("nameError").style.display = "block";
-    valid = false;
-  } else {
-    document.getElementById("nameError").style.display = "none";
+    isValid = false;
   }
 
-  if (!email.value.includes("@")) {
+  if (!email.includes("@") || email === "") {
     document.getElementById("emailError").style.display = "block";
-    valid = false;
-  } else {
-    document.getElementById("emailError").style.display = "none";
+    isValid = false;
   }
 
-  if (password.value.length < 6) {
+  if (password.length < 6) {
     document.getElementById("passwordError").style.display = "block";
-    valid = false;
-  } else {
-    document.getElementById("passwordError").style.display = "none";
+    isValid = false;
   }
 
-  if (valid) {
-    document.getElementById("successMsg").innerText =
-      isSignup ? "Signup Successful 🎉" : "Login Successful ✅";
+  if (!isValid) return;
 
-    document.querySelector(".container").style.animation =
-      "none";
-    document.querySelector(".container").offsetHeight;
-    document.querySelector(".container").style.animation =
-      "float 4s ease-in-out infinite";
+  /* -------- SIGN UP LOGIC -------- */
+  if (isSignup) {
+    const user = { name, email, password };
+    localStorage.setItem("user", JSON.stringify(user));
+
+    successMsg.style.display = "block";
+    successMsg.innerText = "Signup successful 🎉 Please login now.";
+
+    toggleForm(); // Switch to login
+    return;
+  }
+
+  /* -------- LOGIN LOGIC -------- */
+  const savedUser = JSON.parse(localStorage.getItem("user"));
+
+  if (!savedUser) {
+    alert("No account found. Please sign up first.");
+    return;
+  }
+
+  if (email === savedUser.email && password === savedUser.password) {
+    successMsg.style.display = "block";
+    successMsg.innerText = `Welcome back, ${savedUser.name} ✅`;
+    form.reset();
+  } else {
+    alert("Invalid email or password ❌");
   }
 });
