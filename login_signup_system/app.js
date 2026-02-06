@@ -1,14 +1,5 @@
 let isSignup = false;
 
-const lamp = document.createElement("div");
-lamp.className = "lamp";
-
-const light = document.createElement("div");
-light.className = "light";
-
-document.body.appendChild(lamp);
-document.body.appendChild(light);
-
 function toggleForm() {
   isSignup = !isSignup;
 
@@ -31,28 +22,44 @@ function togglePassword() {
   password.type = password.type === "password" ? "text" : "password";
 }
 
-/* Lamp follows focus */
-document.querySelectorAll("input").forEach(input => {
-  input.addEventListener("focus", e => {
-    const rect = e.target.getBoundingClientRect();
-    lamp.style.left = rect.left + rect.width / 2 - 60 + "px";
-    light.style.left = rect.left + rect.width / 2 - 130 + "px";
-  });
-});
-
-/* Lamp looks away on password */
-document.getElementById("password").addEventListener("focus", () => {
-  lamp.style.transform = "rotate(-15deg)";
-  light.style.opacity = "0.3";
-});
-
-document.getElementById("password").addEventListener("blur", () => {
-  lamp.style.transform = "rotate(0deg)";
-  light.style.opacity = "1";
-});
-
-document.getElementById("authForm").addEventListener("submit", e => {
+document.getElementById("authForm").addEventListener("submit", function (e) {
   e.preventDefault();
-  document.getElementById("successMsg").innerText =
-    isSignup ? "Signup Successful ✨" : "Login Successful 🌟";
+
+  let valid = true;
+
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+
+  if (isSignup && name.value.trim() === "") {
+    document.getElementById("nameError").style.display = "block";
+    valid = false;
+  } else {
+    document.getElementById("nameError").style.display = "none";
+  }
+
+  if (!email.value.includes("@")) {
+    document.getElementById("emailError").style.display = "block";
+    valid = false;
+  } else {
+    document.getElementById("emailError").style.display = "none";
+  }
+
+  if (password.value.length < 6) {
+    document.getElementById("passwordError").style.display = "block";
+    valid = false;
+  } else {
+    document.getElementById("passwordError").style.display = "none";
+  }
+
+  if (valid) {
+    document.getElementById("successMsg").innerText =
+      isSignup ? "Signup Successful 🎉" : "Login Successful ✅";
+
+    document.querySelector(".container").style.animation =
+      "none";
+    document.querySelector(".container").offsetHeight;
+    document.querySelector(".container").style.animation =
+      "float 4s ease-in-out infinite";
+  }
 });
