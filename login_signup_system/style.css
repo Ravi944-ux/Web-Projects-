@@ -7,7 +7,7 @@
 
 body {
   height: 100vh;
-  background: linear-gradient(135deg, #4c5683, #764ba2);
+  background: linear-gradient(135deg, #e751c6, #764ba2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +16,7 @@ body {
 
 .container {
   width: 360px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(44, 199, 216, 0.15);
   backdrop-filter: blur(15px);
   padding: 30px;
   border-radius: 20px;
@@ -56,11 +56,11 @@ input {
   border: none;
   outline: none;
   font-size: 14px;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.719);
 }
 
 input:focus {
-  box-shadow: 0 0 12px rgba(102, 126, 234, 0.9);
+  box-shadow: 0 0 12px rgba(232, 140, 181, 0.9);
 }
 
 .password-toggle {
@@ -100,7 +100,7 @@ button:hover {
 .success {
   margin-top: 10px;
   text-align: center;
-  color: #b9ffda;
+  color: #5ee29b;
   font-size: 14px;
 }
 
@@ -111,7 +111,7 @@ button:hover {
 }
 
 .toggle-link {
-  color: #ffd86b;
+  color: #987924;
   cursor: pointer;
   margin-left: 5px;
   font-weight: 600;
