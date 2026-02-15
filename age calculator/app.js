@@ -31,6 +31,6 @@ function calculateAge() {
     months += 12;
   }
 
-  result.style.color = "green";
+  result.style.color = "black";
   result.innerText = `You are ${years} years, ${months} months, and ${days} days old.`;
 }
