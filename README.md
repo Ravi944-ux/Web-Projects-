@@ -17,7 +17,7 @@ These projects helped me improve my frontend skills through hands-on practice an
 ## 📂 Projects Included
 
 ### 1)  EMI Loan Calculator
-📁 Folder: `emi-loan-calculator`  
+ 
 A simple EMI calculator that calculates monthly installment based on:
 - Loan Amount
 - Interest Rate
@@ -28,13 +28,91 @@ A simple EMI calculator that calculates monthly installment based on:
 - Clean and simple UI
 - JavaScript based logic
 
----
 
 ### 2)  Styling a Product Card
-📁 Folder: `Styling a Product Card`  
+  
 A beautiful product card UI design built using HTML & CSS.
 
 **Features:**
 - Modern product card layout
 - CSS styling practice
 - Responsive structure
+
+
+### 3) Age Calculator
+
+A simple web application that calculates a user's age based on their date of birth.
+
+**Features:**
+
+Input date of birth
+
+Calculates exact age in years
+
+Clean UI
+
+### 4) Country Info Finder 🌍
+
+Search for any country and get detailed information.
+
+**Features:**
+
+Search by country name
+
+Displays:
+
+Capital
+
+Population
+
+Region
+
+Flag
+
+Currency
+
+### 5) Email Subscription Form 📧
+
+A simple email subscription UI component.
+
+**Features:**
+
+Email validation
+
+Modern form UI
+
+User-friendly design
+
+### 6) GitHub User Finder 🧑‍💻
+
+Search for any GitHub user and view their profile details.
+
+**Features:**
+
+Search GitHub username
+
+Displays:
+
+Profile picture
+
+Followers
+
+Repositories
+
+Bio
+
+### 6) Login & Signup System 🔐
+
+Basic authentication UI for login and registration.
+
+**Features:**
+
+Login form
+
+Signup form
+
+Input validation
+
+Modern UI
+
+
