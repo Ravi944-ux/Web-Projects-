@@ -101,7 +101,7 @@ Repositories
 
 Bio
 
-### 6) Login & Signup System 🔐
+### 7) Login & Signup System 🔐
 
 Basic authentication UI for login and registration.
 
